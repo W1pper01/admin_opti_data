@@ -3,6 +3,30 @@ import clientPromise from '@/lib/mongodb';
 import { Db, MongoClient, ObjectId } from 'mongodb';
 import { generateKey } from 'crypto';
 
+
+/**
+ * @swagger
+ * /api/movies/{idMovie}:
+ *   get:
+ *     summary: Get a movie by ID
+ *     description: Retrieve a single movie document by its MongoDB ObjectId.
+ *     parameters:
+ *       - in: path
+ *         name: idMovie
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: MongoDB ObjectId of the movie
+ *     responses:
+ *       200:
+ *         description: Movie found
+ *       400:
+ *         description: Invalid movie ID
+ *       404:
+ *         description: Movie not found
+ *       500:
+ *         description: Internal server error
+ */
 export async function GET(request: Request, { params }: { params: { idMovie: string } }): Promise<NextResponse> {
   try {
     const client: MongoClient = await clientPromise;
@@ -25,6 +49,29 @@ export async function GET(request: Request, { params }: { params: { idMovie: str
   }
 }
 
+/**
+ * @swagger
+ * /api/movies/{idMovie}:
+ *   post:
+ *     summary: Add an entry in movie collection
+ *     description: Add a single movie document by its MongoDB ObjectId.
+ *     parameters:
+ *       - in: path
+ *         name: idMovie
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: MongoDB ObjectId of the movie
+ *     responses:
+ *       200:
+ *         description: Movie found
+ *       400:
+ *         description: Invalid movie ID
+ *       404:
+ *         description: Movie not found
+ *       500:
+ *         description: Internal server error
+ */
 export async function POST(): Promise<NextResponse> {
   try {
     const client: MongoClient = await clientPromise;
@@ -52,6 +99,29 @@ export async function POST(): Promise<NextResponse> {
   }
 }
 
+/**
+ * @swagger
+ * /api/movies/{idMovie}:
+ *   put:
+ *     summary: Modificate a movie by ID
+ *     description: Modificate a single movie document by its MongoDB ObjectId.
+ *     parameters:
+ *       - in: path
+ *         name: idMovie
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: MongoDB ObjectId of the movie
+ *     responses:
+ *       200:
+ *         description: Movie 
+ *       400:
+ *         description: Invalid movie ID
+ *       404:
+ *         description: Movie not found
+ *       500:
+ *         description: Internal server error
+ */
 export async function PUT(request: Request, { params }: { params: { idMovie: string } }): Promise<NextResponse> {
   try {
     const client: MongoClient = await clientPromise;
@@ -91,7 +161,29 @@ export async function PUT(request: Request, { params }: { params: { idMovie: str
   }
 }
 
-
+/**
+ * @swagger
+ * /api/movies/{idMovie}:
+ *   delete:
+ *     summary: Delete a movie by ID
+ *     description: Delete a single movie document by its MongoDB ObjectId.
+ *     parameters:
+ *       - in: path
+ *         name: idMovie
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: MongoDB ObjectId of the movie
+ *     responses:
+ *       200:
+ *         description: Movie delete
+ *       400:
+ *         description: Invalid movie ID
+ *       404:
+ *         description: Movie not found
+ *       500:
+ *         description: Internal server error
+ */
 export async function DELETE(request: Request, { params }: { params: { idMovie: string } }): Promise<NextResponse> {
   try {
     const client: MongoClient = await clientPromise;
