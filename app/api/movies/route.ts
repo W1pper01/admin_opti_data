@@ -6,7 +6,7 @@ export async function GET(): Promise<NextResponse> {
   try {
     const client: MongoClient = await clientPromise;
     const db: Db = client.db('sample_mflix');
-    const movies = await db.collection('movies').find({}).limit(10).toArray();
+    const movies = await db.collection('movies').find({}).toArray();
     
     return NextResponse.json(
 	    { status: 200, data: movies }
