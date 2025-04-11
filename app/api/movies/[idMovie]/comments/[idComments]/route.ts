@@ -46,13 +46,13 @@ export async function GET(request: Request, { params }: { params: { idMovie: str
       return NextResponse.json({ status: 400, message: 'Invalid movie ID', error: 'ID format is incorrect' });
     }
     
-    const movie = await db.collection('comments').findOne({ movie_id: new ObjectId(idMovie) },{ _id: new ObjectId(idComments)});
+    const comment = await db.collection('comments').findOne({ movie_id: new ObjectId(idMovie) },{ _id: new ObjectId(idComments)});
     
-    if (!movie) {
+    if (!comment) {
       return NextResponse.json({ status: 404, message: 'Movie not found', error: 'No movie found with the given ID' });
     }
     
-    return NextResponse.json({ status: 200, data: { movie } });
+    return NextResponse.json({ status: 200, data: { comment } });
   } catch (error: any) {
     return NextResponse.json({ status: 500, message: 'Internal Server Error', error: error.message });
   }
@@ -172,17 +172,56 @@ export async function GET(request: Request, { params }: { params: { idMovie: str
       }
   }
   
-/**
+ /**
  * @swagger
  * /api/movies/{idMovie}/comments/{idComments}:
  *   delete:
  *     tags: 
  *       - Single Comment Operations
- *     description: Delete Comments
+ *     summary: Delete a comment by movie ID
+ *     description: Delete a single comment document by its MongoDB movie ObjectId.
+ *     parameters:
+ *       - in: path
+ *         name: idMovie
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: MongoDB ObjectId of the movie
+ *       - in: path
+ *         name: idComments
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: MongoDB ObjectId of the comment
  *     responses:
+ *       200:
+ *         description: Movie found
+ *       400:
+ *         description: Invalid movie ID
  *       404:
- *         description: Hello Comments
+ *         description: Movie not found
+ *       500:
+ *         description: Internal server error
  */
-  export async function DELETE(): Promise<NextResponse> {
-    return NextResponse.json({ status: 405, message: 'Method Not Allowed', error: 'DELETE method is not supported' });
+  export async function DELETE(request: Request, { params }: { params: { idMovie: string, idComments: string } }): Promise<NextResponse> {
+    try {
+      const client: MongoClient = await clientPromise;
+      const db: Db = client.db('sample_mflix');
+      
+      const { idMovie } = params;
+      const { idComments } = params;
+      if (!ObjectId.isValid(idMovie)) {
+        return NextResponse.json({ status: 400, message: 'Invalid movie ID', error: 'ID format is incorrect' });
+      }
+      
+      const comment = await db.collection('comments').deleteOne({ _id: new ObjectId(idComments), movie_id: new ObjectId(idMovie) });
+      
+      if (!comment) {
+        return NextResponse.json({ status: 404, message: 'Movie not found', error: 'No movie found with the given ID' });
+      }
+      
+      return NextResponse.json({ status: 200, data: { comment } });
+    } catch (error: any) {
+      return NextResponse.json({ status: 500, message: 'Internal Server Error', error: error.message });
+    }
   }
