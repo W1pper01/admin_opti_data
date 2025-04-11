@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import clientPromise from '@/lib/mongodb';
 import { Db, MongoClient, ObjectId } from 'mongodb';
 import { generateKey } from 'crypto';
+import { Console } from 'console';
 
 
 /**
@@ -45,6 +46,9 @@ export async function GET(request: Request, { params }: { params: { idMovie: str
     if (!ObjectId.isValid(idMovie)) {
       return NextResponse.json({ status: 400, message: 'Invalid movie ID', error: 'ID format is incorrect' });
     }
+    if (!ObjectId.isValid(idComments)) {
+        return NextResponse.json({ status: 400, message: 'Invalid comments ID', error: 'ID format is incorrect' });
+    }
     
     const comment = await db.collection('comments').findOne({ movie_id: new ObjectId(idMovie), _id: new ObjectId(idComments)});
     
@@ -83,7 +87,7 @@ export async function GET(request: Request, { params }: { params: { idMovie: str
  *       500:
  *         description: Internal server error
  */
- export async function POST(request: Request, { params }: { params: { idMovie: string} }): Promise<NextResponse> {
+ export async function POST(request: Request, { params }: { params: { idMovie: string } }): Promise<NextResponse> {
     try {
       const client: MongoClient = await clientPromise;
       const db: Db = client.db('sample_mflix');
@@ -93,7 +97,7 @@ export async function GET(request: Request, { params }: { params: { idMovie: str
       const comment = {
         name: "Arbi Tazeur",
         email: "arbi.tazeur@fqdn.com",
-        movie_id: {idMovie},
+        movie_id: new ObjectId(idMovie),
         texte: "Film incroyable, un lore de qualité totalement respecté. ps: On veut plus de Nekron",
         date: "2025-04-11T08:57:05.000Z"
       };      
@@ -149,10 +153,11 @@ export async function GET(request: Request, { params }: { params: { idMovie: str
         
         const { idMovie, idComments } = params;
 
+        console.log("idMovie: ", idMovie)
         const comment = {
           name: "Arbi Tazeur",
           email: "arbi.tazeur@fqdn.com",
-          movie_id: {idMovie},
+          movie_id: new ObjectId(idMovie),
           texte: "Film incroyable; Extraordinaire, un lore de qualité totalement respecté. ps: On veut plus de Nekron",
           date: "2025-04-11T08:57:05.000Z"
         };      
@@ -208,8 +213,8 @@ export async function GET(request: Request, { params }: { params: { idMovie: str
       const client: MongoClient = await clientPromise;
       const db: Db = client.db('sample_mflix');
       
-      const { idMovie } = params;
-      const { idComments } = params;
+      const { idMovie, idComments } = params;
+
       if (!ObjectId.isValid(idMovie)) {
         return NextResponse.json({ status: 400, message: 'Invalid movie ID', error: 'ID format is incorrect' });
       }
