@@ -8,6 +8,8 @@ import { generateKey } from 'crypto';
  * @swagger
  * /api/movies/{idMovie}:
  *   get:
+ *     tags: 
+ *       - Single Movie Operations
  *     summary: Get a movie by ID
  *     description: Retrieve a single movie document by its MongoDB ObjectId.
  *     parameters:
@@ -53,6 +55,8 @@ export async function GET(request: Request, { params }: { params: { idMovie: str
  * @swagger
  * /api/movies/{idMovie}:
  *   post:
+ *     tags: 
+ *       - Single Movie Operations
  *     summary: Add an entry in movie collection
  *     description: Add a single movie document by its MongoDB ObjectId.
  *     parameters:
@@ -103,6 +107,8 @@ export async function POST(): Promise<NextResponse> {
  * @swagger
  * /api/movies/{idMovie}:
  *   put:
+ *     tags: 
+ *       - Single Movie Operations
  *     summary: Modificate a movie by ID
  *     description: Modificate a single movie document by its MongoDB ObjectId.
  *     parameters:
@@ -165,6 +171,8 @@ export async function PUT(request: Request, { params }: { params: { idMovie: str
  * @swagger
  * /api/movies/{idMovie}:
  *   delete:
+ *     tags: 
+ *       - Single Movie Operations
  *     summary: Delete a movie by ID
  *     description: Delete a single movie document by its MongoDB ObjectId.
  *     parameters:

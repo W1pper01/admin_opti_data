@@ -8,6 +8,8 @@ import { generateKey } from 'crypto';
  * @swagger
  * /api/movies/{idMovie}/comments:
  *   get:
+ *     tags: 
+ *       - Movie Comments Operations
  *     summary: Get a comments by movie ID
  *     description: Retrieve all comments documents by a MongoDB movie ObjectId.
  *     parameters:
@@ -53,6 +55,8 @@ export async function GET(request: Request, { params }: { params: { idMovie: str
  * @swagger
  * /api/movies/{idMovie}/comments:
  *   post:
+ *     tags: 
+ *       - Movie Comments Operations
  *     description: Add movies
  *     responses:
  *       200:
@@ -66,6 +70,8 @@ export async function GET(request: Request, { params }: { params: { idMovie: str
    * @swagger
    * /api/movies/{idMovie}/comments:
    *   put:
+   *     tags: 
+ *          - Movie Comments Operations
    *     description: Modify comments
    *     responses:
    *       404:
@@ -75,15 +81,17 @@ export async function GET(request: Request, { params }: { params: { idMovie: str
     return NextResponse.json({ status: 405, message: 'Method Not Allowed', error: 'PUT method is not supported' });
   }
   
-  /**
-   * @swagger
-   * /api/movies/{idMovie}/comments:
-   *   delete:
-   *     description: Delete Comments
-   *     responses:
-   *       404:
-   *         description: Hello Comments
-   */
+/**
+ * @swagger
+ * /api/movies/{idMovie}/comments:
+ *   delete:
+ *     tags: 
+ *       - Movie Comments Operations
+ *     description: Delete Comments
+ *     responses:
+ *       404:
+ *         description: Hello Comments
+ */
   export async function DELETE(): Promise<NextResponse> {
     return NextResponse.json({ status: 405, message: 'Method Not Allowed', error: 'DELETE method is not supported' });
   }

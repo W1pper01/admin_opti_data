@@ -9,6 +9,24 @@ export const getApiDocs = async () => {
         title: "Next Swagger API Example",
         version: "1.0",
       },
+      tags: [
+        {
+          name: "Movies Management",
+          description: "Operations related to multiple movies"
+        },
+        {
+          name: "Single Movie Operations",
+          description: "Operations related to a specific movie"
+        },
+        {
+          name: "Movie Comments Operations",
+          description: "Operations related to all comments for a movie"
+        },
+        {
+          name: "Single Comment Operations",
+          description: "Operations related to a specific comment"
+        }
+      ],
       components: {
         securitySchemes: {
           BearerAuth: {

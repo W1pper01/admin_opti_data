@@ -6,6 +6,8 @@ import clientPromise from '@/lib/mongodb';
  * @swagger
  * /api/movies:
  *   get:
+ *     tags: 
+ *       - Movies Management
  *     description: Returns movies
  *     responses:
  *       200:
@@ -32,6 +34,8 @@ export async function GET(): Promise<NextResponse> {
  * @swagger
  * /api/movies:
  *   post:
+ *     tags: 
+ *       - Movies Management
  *     description: Returns movies
  *     responses:
  *       200:
@@ -45,6 +49,8 @@ export async function POST(): Promise<NextResponse> {
  * @swagger
  * /api/movies:
  *   put:
+ *     tags: 
+ *       - Movies Management
  *     description: Returns movies
  *     responses:
  *       404:
@@ -58,6 +64,8 @@ export async function PUT(): Promise<NextResponse> {
  * @swagger
  * /api/movies:
  *   delete:
+ *     tags: 
+ *       - Movies Management
  *     description: Returns movies
  *     responses:
  *       404:

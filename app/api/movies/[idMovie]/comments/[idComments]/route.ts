@@ -6,8 +6,10 @@ import { generateKey } from 'crypto';
 
 /**
  * @swagger
- * /api/movies/{idMovie}/comments/{idCmments}:
+ * /api/movies/{idMovie}/comments/{idComments}:
  *   get:
+ *     tags: 
+ *       - Single Comment Operations
  *     summary: Get a comments by movie ID
  *     description: Retrieve a single comment document by its MongoDB movie ObjectId.
  *     parameters:
@@ -17,6 +19,12 @@ import { generateKey } from 'crypto';
  *         schema:
  *           type: string
  *         description: MongoDB ObjectId of the movie
+ *       - in: path
+ *         name: idComments
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: MongoDB ObjectId of the comment
  *     responses:
  *       200:
  *         description: Movie found
@@ -38,7 +46,7 @@ export async function GET(request: Request, { params }: { params: { idMovie: str
       return NextResponse.json({ status: 400, message: 'Invalid movie ID', error: 'ID format is incorrect' });
     }
     
-    const movie = await db.collection('comments').findOne({ movie_id: new ObjectId(idMovie) });
+    const movie = await db.collection('comments').findOne({ movie_id: new ObjectId(idMovie) },{ _id: new ObjectId(idComments)});
     
     if (!movie) {
       return NextResponse.json({ status: 404, message: 'Movie not found', error: 'No movie found with the given ID' });
@@ -52,17 +60,19 @@ export async function GET(request: Request, { params }: { params: { idMovie: str
 
 /**
  * @swagger
- * /api/movies/{idMovie}/comments/:
+ * /api/movies/{idMovie}/comments/{idComments}:
  *   post:
- *     summary: Add an entry in movie collection
- *     description: Add a single movie document by its MongoDB ObjectId.
+ *     tags: 
+ *       - Single Comment Operations
+ *     summary: Add an entry in comment collection
+ *     description: Add a single movie comment document by its MongoDB movie ObjectId.
  *     parameters:
  *       - in: path
  *         name: idMovie
  *         required: true
  *         schema:
  *           type: string
- *         description: MongoDB ObjectId of the movie
+ *         description: MongoDB ObjectId of the movie    
  *     responses:
  *       200:
  *         description: Movie found
@@ -73,54 +83,106 @@ export async function GET(request: Request, { params }: { params: { idMovie: str
  *       500:
  *         description: Internal server error
  */
- export async function POST(): Promise<NextResponse> {
+ export async function POST(request: Request, { params }: { params: { idMovie: string} }): Promise<NextResponse> {
     try {
       const client: MongoClient = await clientPromise;
       const db: Db = client.db('sample_mflix');
       
+      const { idMovie } = params;
+
       const comment = {
         name: "Arbi Tazeur",
         email: "arbi.tazeur@fqdn.com",
-        movie_id: "",
+        movie_id: {idMovie},
         texte: "Film incroyable, un lore de qualité totalement respecté. ps: On veut plus de Nekron",
         date: "2025-04-11T08:57:05.000Z"
       };      
       const result = await db.collection('comments').insertOne(comment);
   
-      const newMovie = await db.collection('movies').findOne({ _id: result.insertedId });
+      const newComment = await db.collection('comments').findOne({ _id: result.insertedId });
       
       return NextResponse.json({ 
         status: 201, 
-        message: 'Movie created successfully',
-        data: { movie: newMovie } 
+        message: 'Comment created successfully',
+        data: { comment: newComment } 
       });
     } catch (error: any) {
       return NextResponse.json({ status: 500, message: 'Internal Server Error', error: error.message });
     }
   }
 
-  /**
-   * @swagger
-   * /api/movies/{idMovie}/comments:
-   *   put:
-   *     description: Modify comments
-   *     responses:
-   *       404:
-   *         description: Hello Comments
-   */
-  export async function PUT(): Promise<NextResponse> {
-    return NextResponse.json({ status: 405, message: 'Method Not Allowed', error: 'PUT method is not supported' });
+ /**
+ * @swagger
+ * /api/movies/{idMovie}/comments/{idComments}:
+ *   put:
+ *     tags: 
+ *       - Single Comment Operations
+ *     summary: edit a comment by movie ID
+ *     description: Edit a single comment document by its MongoDB movie ObjectId.
+ *     parameters:
+ *       - in: path
+ *         name: idMovie
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: MongoDB ObjectId of the movie
+ *       - in: path
+ *         name: idComments
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: MongoDB ObjectId of the comment
+ *     responses:
+ *       200:
+ *         description: Movie found
+ *       400:
+ *         description: Invalid movie ID
+ *       404:
+ *         description: Movie not found
+ *       500:
+ *         description: Internal server error
+ */
+  export async function PUT(request: Request, { params }: { params: { idMovie: string, idComments: string }  }): Promise<NextResponse> {
+    try {
+        const client: MongoClient = await clientPromise;
+        const db: Db = client.db('sample_mflix');
+        
+        const { idMovie, idComments } = params;
+
+        const comment = {
+          name: "Arbi Tazeur",
+          email: "arbi.tazeur@fqdn.com",
+          movie_id: {idMovie},
+          texte: "Film incroyable; Extraordinaire, un lore de qualité totalement respecté. ps: On veut plus de Nekron",
+          date: "2025-04-11T08:57:05.000Z"
+        };      
+        const result = await db.collection('comments').updateOne(
+        { _id: new ObjectId(idComments) },
+        { $set: comment });
+    
+        const newComment = await db.collection('comments').findOne({ _id: result.insertedId });
+        
+        return NextResponse.json({ 
+          status: 201, 
+          message: 'Comment created successfully',
+          data: { comment: newComment } 
+        });
+      } catch (error: any) {
+        return NextResponse.json({ status: 500, message: 'Internal Server Error', error: error.message });
+      }
   }
   
-  /**
-   * @swagger
-   * /api/movies/{idMovie}/comments:
-   *   delete:
-   *     description: Delete Comments
-   *     responses:
-   *       404:
-   *         description: Hello Comments
-   */
+/**
+ * @swagger
+ * /api/movies/{idMovie}/comments/{idComments}:
+ *   delete:
+ *     tags: 
+ *       - Single Comment Operations
+ *     description: Delete Comments
+ *     responses:
+ *       404:
+ *         description: Hello Comments
+ */
   export async function DELETE(): Promise<NextResponse> {
     return NextResponse.json({ status: 405, message: 'Method Not Allowed', error: 'DELETE method is not supported' });
   }
