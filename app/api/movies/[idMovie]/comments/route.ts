@@ -39,13 +39,13 @@ export async function GET(request: Request, { params }: { params: { idMovie: str
       return NextResponse.json({ status: 400, message: 'Invalid movie ID', error: 'ID format is incorrect' });
     }
     
-    const movie = await db.collection('comments').find({ movie_id: new ObjectId(idMovie) }).limit(10).toArray();
+    const comment = await db.collection('comments').find({ movie_id: new ObjectId(idMovie) }).limit(10).toArray();
     
-    if (!movie) {
+    if (!comment) {
       return NextResponse.json({ status: 404, message: 'Movie not found', error: 'No movie found with the given ID' });
     }
     
-    return NextResponse.json({ status: 200, data: { movie } });
+    return NextResponse.json({ status: 200, data: { comment } });
   } catch (error: any) {
     return NextResponse.json({ status: 500, message: 'Internal Server Error', error: error.message });
   }
