@@ -165,7 +165,7 @@ export async function GET(request: Request, { params }: { params: { idMovie: str
         { _id: new ObjectId(idComments) },
         { $set: comment });
     
-        const newComment = await db.collection('comments').findOne({ _id: result.insertedId });
+        const newComment = await db.collection('comments').findOne({ _id: new ObjectId(idComments) });
         
         return NextResponse.json({ 
           status: 201, 
