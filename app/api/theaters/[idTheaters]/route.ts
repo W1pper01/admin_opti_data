@@ -82,12 +82,19 @@ export async function POST(): Promise<NextResponse> {
     const db: Db = client.db('sample_mflix');
     
     const theaters = {
-      title: "Warhammer New Days",
-      year: 2026,
-      director: "Arbi Tazeur",
-      genre: ["action","drame"],
-      plot: "...The last day of Humanity has come"
-    };
+        location: {
+          address: {
+            street1: "340 W Market",
+            city: "Bloomington",
+            state: "MN",
+            zipcode: "55425"
+          },
+          geo: {
+            type: "Point",
+            coordinates: [-93.24565, 44.85466]
+          }
+        }
+      };
     
     const result = await db.collection('theaters').insertOne(theaters);
 
@@ -139,12 +146,19 @@ export async function PUT(request: Request, { params }: { params: any }): Promis
     }
   
     const theaters = {
-      title: "Warhammer New Days",
-      year: 2026,
-      director: "Arbi Tazeur",
-      genre: ["action","drame"],
-      plot: "...The last day of Humanity has come...Never mind Humanity will survive"
-    };
+        location: {
+          address: {
+            street1: "123 New Street",
+            city: "Bordeaux",
+            state: "IL",
+            zipcode: "33000"
+          },
+          geo: {
+            type: "Point",
+            coordinates: [-89.605, 39.7817]
+          }
+        }
+      };
     
     const result = await db.collection('theaters').updateOne(
       { _id: new ObjectId(idTheaters) },
