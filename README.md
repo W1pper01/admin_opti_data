@@ -1,5 +1,31 @@
 # Movies API - Application Next.js avec MongoDB
 
+## Utilisation de l'API
+
+# idMovies
+
+# Générer un nouvelle id avec la commande PUT
+
+curl -X GET https://ton-projet.vercel.app/api/movies/573a1390f29313caabcd42e8
+
+curl -X POST https://ton-projet.vercel.app/api/movies/573a1390f29313caabcd42e8
+
+curl -X PUT https://ton-projet.vercel.app/api/movies/573a1390f29313caabcd42e8
+
+curl -X DELETE https://ton-projet.vercel.app/api/movies/573a1390f29313caabcd42e8
+
+# idComments
+
+# Générer un nouvelle id avec la commande PUT
+
+curl -X GET https://ton-projet.vercel.app/api/movies/573a1390f29313caabcd42e8/comments/5a9427648b0beebeb69579e7
+
+curl -X POST https://ton-projet.vercel.app/api/movies/573a1390f29313caabcd42e8/comments
+
+curl -X PUT https://ton-projet.vercel.app/api/movies/573a1390f29313caabcd42e8/comments/5a9427648b0beebeb69579e7
+
+curl -X DELETE https://ton-projet.vercel.app/api/movies/573a1390f29313caabcd42e8/comments/5a9427648b0beebeb69579e7
+
 ## Description
 
 Movies API est une application web moderne construite avec Next.js et MongoDB. Cette application offre une API pour gérer une collection de films et leurs commentaires associés. Elle démontre comment connecter et utiliser MongoDB comme base de données backend pour votre application Next.js, offrant une solution et évolutive pour la gestion de données de films.
@@ -189,8 +215,4 @@ Les contributions sont les bienvenues ! N'hésitez pas à ouvrir une issue ou à
 
 ## Contact
 
-<<<<<<< HEAD
 Robin GARCIA / Kieran GREEN
-=======
-Robin GARCIA / Kieran GREEN
->>>>>>> 4a3ff8573cf030c81e47f7d51947785fab786d90
