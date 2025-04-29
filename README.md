@@ -189,4 +189,8 @@ Les contributions sont les bienvenues ! N'hésitez pas à ouvrir une issue ou à
 
 ## Contact
 
+<<<<<<< HEAD
 Robin GARCIA / Kieran GREEN
+=======
+Robin GARCIA / Kieran GREEN
+>>>>>>> 4a3ff8573cf030c81e47f7d51947785fab786d90
