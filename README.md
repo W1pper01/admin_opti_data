@@ -158,16 +158,21 @@ La documentation Swagger vous permet de :
 | Méthode | Endpoint | Description |
 |---------|----------|-------------|
 | `GET` | `/api/movies` | Récupérer tous les films |
-| `POST` | `/api/movies` | Ajouter un nouveau film |
-| `PUT` | `/api/movies` | Mettre à jour plusieurs films |
+| `POST` | `/api/movies` | Ajouter un nouveau film ( Non intégré ) |
+| `PUT` | `/api/movies` | Mettre à jour plusieurs films ( Non intégré ) |
+| `DELETE` | `/api/movies` | Supprimer un film ( Non intégré ) |
 | `GET` | `/api/movies/{idMovie}` | Récupérer un film spécifique |
+| `POST` | `/api/movies/{idMovie}` | Ajouter un film |
 | `PUT` | `/api/movies/{idMovie}` | Mettre à jour un film |
 | `DELETE` | `/api/movies/{idMovie}` | Supprimer un film |
 | `GET` | `/api/movies/{idMovie}/comments` | Récupérer les commentaires d'un film |
-| `POST` | `/api/movies/{idMovie}/comments` | Ajouter un commentaire à un film |
+| `POST` | `/api/movies/{idMovie}/comments` | Ajouter un commentaire ( Non intégré )|
+| `PUT` | `/api/movies/{idMovie}/comments` | Mettre à jour un commentaire ( Non intégré ) |
+| `DELETE` | `/api/movies/{idMovie}/comments` | Supprimer un commentaire ( Non intégré ) |
 | `GET` | `/api/movies/{idMovie}/comments/{idComments}` | Récupérer un commentaire spécifique |
-| `PUT` | `/api/movies/{idMovie}/comments/{idComments}` | Mettre à jour un commentaire |
-| `DELETE` | `/api/movies/{idMovie}/comments/{idComments}` | Supprimer un commentaire |## Utilisation de l'API
+| `POST` | `/api/movies/{idMovie}/comments/{idComments}` | Ajouter un commentaire à un film |
+| `PUT` | `/api/movies/{idMovie}/comments/{idComments}` | Mettre à jour un commentaire d'un film |
+| `DELETE` | `/api/movies/{idMovie}/comments/{idComments}` | Supprimer un commentaire d'un film |
 
 
 ### Documentation API avec Swagger
