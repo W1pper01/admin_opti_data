@@ -1,83 +1,170 @@
-## Example app using MongoDB
+# Movies API - Application Next.js avec MongoDB
 
-[MongoDB](https://www.mongodb.com/) is a general purpose, document-based, distributed database built for modern application developers and for the cloud era. This example will show you how to connect to and use MongoDB as your backend for your Next.js app.
+![MongoDB](https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white)
+![Next.js](https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white)
+![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
 
-If you want to learn more about MongoDB, visit the following pages:
+## Description
 
-- [MongoDB Atlas](https://mongodb.com/atlas)
-- [MongoDB Documentation](https://docs.mongodb.com/)
+Movies API est une application web moderne construite avec Next.js et MongoDB. Cette application offre une API pour gérer une collection de films et leurs commentaires associés. Elle démontre comment connecter et utiliser MongoDB comme base de données backend pour votre application Next.js, offrant une solution et évolutive pour la gestion de données de films.
 
-## Deploy your own
+## Fonctionnalités
 
-Once you have access to the environment variables you'll need, deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=next-example) or preview live with [StackBlitz](https://stackblitz.com/github/vercel/next.js/tree/canary/examples/with-mongodb)
+- API RESTful pour la gestion des films
+- Système de commentaires pour chaque film
+- Documentation API intégrée avec Swagger
+- App de démonstration pour tester les fonctionnalités
+- Stockage de données avec MongoDB
+- Routes API typées avec TypeScript
+- Déploiement facile sur Vercel
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?project-name=with-mongodb&repository-name=with-mongodb&repository-url=https%3A%2F%2Fgithub.com%2Fvercel%2Fnext.js%2Ftree%2Fcanary%2Fexamples%2Fwith-mongodb&integration-ids=oac_jnzmjqM10gllKmSrG0SGrHOH)
+## Démarrage
 
-## How to use
+### Prérequis
 
-Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [npm](https://docs.npmjs.com/cli/init), [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/), or [pnpm](https://pnpm.io) to bootstrap the example:
+- Node.js 14.6.0 ou version supérieure
+- npm, yarn ou pnpm
+- Compte MongoDB Atlas (gratuit) ou MongoDB installé localement
+
+### Installation
+
+1. Clonez le dépôt :
 
 ```bash
-npx create-next-app --example with-mongodb with-mongodb-app
+git clone https://github.com/votre-username/with-mongodb-app.git
+cd with-mongodb-app
 ```
+
+2. Installez les dépendances :
 
 ```bash
-yarn create next-app --example with-mongodb with-mongodb-app
+npm install
+# ou
+yarn install
+# ou
+pnpm install
 ```
 
-```bash
-pnpm create next-app --example with-mongodb with-mongodb-app
-```
-
-## Configuration
-
-### Set up a MongoDB database
-
-Set up a MongoDB database either locally or with [MongoDB Atlas for free](https://mongodb.com/atlas).
-
-### Set up environment variables
-
-Copy the `env.local.example` file in this directory to `.env.local` (which will be ignored by Git):
+3. Configurez les variables d'environnement :
 
 ```bash
 cp .env.local.example .env.local
 ```
 
-Set each variable on `.env.local`:
+Modifiez le fichier `.env.local` et ajoutez votre chaîne de connexion MongoDB :
 
-- `MONGODB_URI` - Your MongoDB connection string. If you are using [MongoDB Atlas](https://mongodb.com/atlas) you can find this by clicking the "Connect" button for your cluster.
+```
+MONGODB_URI=votre_chaine_de_connexion_mongodb
+```
 
-### Run Next.js in development mode
+4. Lancez le serveur de développement :
 
 ```bash
-npm install
 npm run dev
-# or
-yarn install
+# ou
 yarn dev
-# or
-pnpm install
+# ou
 pnpm dev
 ```
 
-Your app should be up and running on [http://localhost:3000](http://localhost:3000)! If it doesn't work, post on [GitHub discussions](https://github.com/vercel/next.js/discussions).
+Votre application sera disponible à l'adresse [http://localhost:3000](http://localhost:3000).
 
-You will either see a message stating "You are connected to MongoDB" or "You are NOT connected to MongoDB". Ensure that you have provided the correct `MONGODB_URI` environment variable.
+## 🔧 Configuration
 
-When you are successfully connected, you can refer to the [MongoDB Node.js Driver docs](https://mongodb.github.io/node-mongodb-native/3.4/tutorials/collections/) for further instructions on how to query your database.
+### Configuration de MongoDB
 
-## Deploy on Vercel
+1. Créez un compte sur [MongoDB Atlas](https://www.mongodb.com/atlas) (gratuit) ou utilisez une installation locale de MongoDB.
 
-You can deploy this app to the cloud with [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
+2. Pour MongoDB Atlas :
+   - Créez un nouveau cluster
+   - Configurez un utilisateur de base de données avec les privilèges appropriés
+   - Configurez les règles de réseau pour permettre l'accès depuis votre adresse IP
+   - Obtenez votre chaîne de connexion en cliquant sur "Connect" > "Connect your application"
 
-#### Deploy Your Local Project
+3. Ajoutez la chaîne de connexion à votre fichier `.env.local`.
 
-To deploy your local project to Vercel, push it to GitHub/GitLab/Bitbucket and [import to Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example).
+### Structure du projet
 
-**Important**: When you import your project on Vercel, make sure to click on **Environment Variables** and set them to match your `.env.local` file.
+```
+├── .next/                       # Dossier de build Next.js
+├── app/                         # Dossier principal de l'application
+│   ├── api/                     # Routes API
+│   │   ├── movies/              # API pour les films
+│   │   │   ├── [idMovie]/       # Route dynamique pour un film spécifique
+│   │   │   │   ├── comments/    # API pour les commentaires d'un film
+│   │   │   │   │   └── [idComments]/  # Route pour un commentaire spécifique
+│   │   │   │   └── route.ts     # Gestionnaire de route pour un film
+│   │   │   └── route.ts         # Gestionnaire de route pour tous les films
+│   ├── api-doc/                 # Documentation API avec Swagger
+│   │   ├── page.tsx             # Page de documentation API
+│   │   └── react-swagger.tsx    # Composant Swagger pour React
+│   └── app-demo/                # Démo de l'application
+│       ├── page.tsx             # Page principale de démo
+│       ├── actions.ts           # Actions côté serveur
+│       ├── favicon.ico          # Icône de l'application
+│       └── layout.tsx           # Layout de l'application
+├── lib/                         # Utilitaires et fonctions d'aide
+│   ├── mongodb.ts               # Configuration de la connexion à MongoDB
+│   └── swagger.ts               # Configuration Swagger
+├── node_modules/                # Dépendances installées
+├── pages/                       # Pages traditionnelles (dans le cas d'une structure mixte)
+├── public/                      # Fichiers statiques
+├── styles/                      # Feuilles de style CSS/SCSS
+├── .env.local                   # Variables d'environnement (à créer)
+├── .gitignore                   # Configuration Git
+├── next-env.d.ts                # Types pour Next.js
+├── next.config.js               # Configuration de Next.js
+└── package-lock.json            # Verrouillage des versions des dépendances
+```
 
-#### Deploy from Our Template
+## Utilisation de l'API
 
-Alternatively, you can deploy using our template by clicking on the Deploy button below.
+localhost:3000/api-doc
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?project-name=with-mongodb&repository-name=with-mongodb&repository-url=https%3A%2F%2Fgithub.com%2Fvercel%2Fnext.js%2Ftree%2Fcanary%2Fexamples%2Fwith-mongodb&integration-ids=oac_jnzmjqM10gllKmSrG0SGrHOH)
+
+### Documentation API avec Swagger
+
+L'application inclut une documentation Swagger accessible via la route `/api-doc`. Elle est configurée dans le fichier `lib/swagger.ts` et implémentée dans `app/api-doc/page.tsx`.
+
+Pour plus d'informations sur la façon d'interroger votre base de données, consultez la [documentation MongoDB](https://docs.mongodb.com/) et la [documentation du pilote Node.js pour MongoDB](https://mongodb.github.io/node-mongodb-native/).
+
+## Déploiement
+
+### Déploiement sur Vercel
+
+Le moyen le plus simple de déployer votre application Next.js est d'utiliser [Vercel](https://vercel.com), la plateforme des créateurs de Next.js.
+
+1. Poussez votre code vers GitHub, GitLab ou Bitbucket.
+
+2. Importez votre projet sur Vercel:
+   - Connectez-vous à [Vercel](https://vercel.com)
+   - Sélectionnez "Import Project" et pointez vers votre dépôt
+   - Configurez les variables d'environnement (notamment `MONGODB_URI`)
+   - Cliquez sur "Deploy"
+
+**Alternative**: Déployez directement avec le bouton Vercel:
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fvotre-username%2Fwith-mongodb-app)
+
+## Technologies utilisées
+
+- [Next.js](https://nextjs.org/) - Framework React pour la production
+- [TypeScript](https://www.typescriptlang.org/) - Langage de programmation typé
+- [MongoDB](https://www.mongodb.com/) - Base de données NoSQL orientée document
+- [React](https://reactjs.org/) - Bibliothèque JavaScript pour les interfaces utilisateur
+- [Swagger](https://swagger.io/) - Outil de documentation d'API
+- [App Router](https://nextjs.org/docs/app) - Nouvelle architecture de routage Next.js
+
+## Contribuer
+
+Les contributions sont les bienvenues ! N'hésitez pas à ouvrir une issue ou à soumettre une pull request.
+
+1. Forkez le projet
+2. Créez votre branche de fonctionnalité (`git checkout -b feature/amazing-feature`)
+3. Committez vos changements (`git commit -m 'Add some amazing feature'`)
+4. Poussez vers la branche (`git push origin feature/amazing-feature`)
+5. Ouvrez une Pull Request
+
+## Contact
+
+Robin GARCIA / Kieran GREEN
