@@ -1,9 +1,5 @@
 # Movies API - Application Next.js avec MongoDB
 
-![MongoDB](https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white)
-![Next.js](https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white)
-![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
-
 ## Description
 
 Movies API est une application web moderne construite avec Next.js et MongoDB. Cette application offre une API pour gérer une collection de films et leurs commentaires associés. Elle démontre comment connecter et utiliser MongoDB comme base de données backend pour votre application Next.js, offrant une solution et évolutive pour la gestion de données de films.
@@ -31,7 +27,7 @@ Movies API est une application web moderne construite avec Next.js et MongoDB. C
 1. Clonez le dépôt :
 
 ```bash
-git clone https://github.com/votre-username/with-mongodb-app.git
+https://github.com/W1pper01/admin_opti_data.git
 cd with-mongodb-app
 ```
 
@@ -39,10 +35,6 @@ cd with-mongodb-app
 
 ```bash
 npm install
-# ou
-yarn install
-# ou
-pnpm install
 ```
 
 3. Configurez les variables d'environnement :
@@ -61,15 +53,11 @@ MONGODB_URI=votre_chaine_de_connexion_mongodb
 
 ```bash
 npm run dev
-# ou
-yarn dev
-# ou
-pnpm dev
 ```
 
 Votre application sera disponible à l'adresse [http://localhost:3000](http://localhost:3000).
 
-## 🔧 Configuration
+## Configuration
 
 ### Configuration de MongoDB
 
@@ -117,9 +105,43 @@ Votre application sera disponible à l'adresse [http://localhost:3000](http://lo
 └── package-lock.json            # Verrouillage des versions des dépendances
 ```
 
-## Utilisation de l'API
+## Documentation de l'API
 
-localhost:3000/api-doc
+### Swagger UI
+
+L'API est entièrement documentée avec Swagger UI. Une fois l'application lancée, vous pouvez accéder à la documentation interactive à l'adresse :
+
+```
+http://localhost:3000/api-doc
+```
+
+ou, pour l'application déployée :
+
+```
+https://your-app-url.vercel.app/api-doc
+```
+
+La documentation Swagger vous permet de :
+- Explorer tous les endpoints disponibles
+- Voir les modèles de données requis
+- Tester les endpoints directement depuis l'interface
+- Visualiser les réponses attendues
+
+### Résumé des Endpoints
+
+| Méthode | Endpoint | Description |
+|---------|----------|-------------|
+| `GET` | `/api/movies` | Récupérer tous les films |
+| `POST` | `/api/movies` | Ajouter un nouveau film |
+| `PUT` | `/api/movies` | Mettre à jour plusieurs films |
+| `GET` | `/api/movies/{idMovie}` | Récupérer un film spécifique |
+| `PUT` | `/api/movies/{idMovie}` | Mettre à jour un film |
+| `DELETE` | `/api/movies/{idMovie}` | Supprimer un film |
+| `GET` | `/api/movies/{idMovie}/comments` | Récupérer les commentaires d'un film |
+| `POST` | `/api/movies/{idMovie}/comments` | Ajouter un commentaire à un film |
+| `GET` | `/api/movies/{idMovie}/comments/{idComments}` | Récupérer un commentaire spécifique |
+| `PUT` | `/api/movies/{idMovie}/comments/{idComments}` | Mettre à jour un commentaire |
+| `DELETE` | `/api/movies/{idMovie}/comments/{idComments}` | Supprimer un commentaire |## Utilisation de l'API
 
 
 ### Documentation API avec Swagger
