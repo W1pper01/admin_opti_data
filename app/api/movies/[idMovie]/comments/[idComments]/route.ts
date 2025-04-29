@@ -87,7 +87,7 @@ export async function GET(request: Request, { params }: { params: any }): Promis
  *       500:
  *         description: Internal server error
  */
- export async function POST(request: Request, { params }: { params: { idMovie: string } }): Promise<NextResponse> {
+ export async function POST(request: Request, { params }: { params: any }): Promise<NextResponse> {
     try {
       const client: MongoClient = await clientPromise;
       const db: Db = client.db('sample_mflix');
@@ -146,7 +146,7 @@ export async function GET(request: Request, { params }: { params: any }): Promis
  *       500:
  *         description: Internal server error
  */
-  export async function PUT(request: Request, { params }: { params: { idMovie: string, idComments: string }  }): Promise<NextResponse> {
+  export async function PUT(request: Request, { params }: { params: any }): Promise<NextResponse> {
     try {
         const client: MongoClient = await clientPromise;
         const db: Db = client.db('sample_mflix');
@@ -208,7 +208,7 @@ export async function GET(request: Request, { params }: { params: any }): Promis
  *       500:
  *         description: Internal server error
  */
-  export async function DELETE(request: Request, { params }: { params: { idMovie: string, idComments: string } }): Promise<NextResponse> {
+  export async function DELETE(request: Request, { params }: { params: any }): Promise<NextResponse> {
     try {
       const client: MongoClient = await clientPromise;
       const db: Db = client.db('sample_mflix');
