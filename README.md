@@ -5,6 +5,7 @@
 # idMovies
 
 # Générer un nouvelle id avec la commande PUT
+# L'utilisation des Endpoints sur la page /api-doc est similaire, prendre un idMovies généré par le Endpoint PUT
 
 curl -X GET https://ton-projet.vercel.app/api/movies/573a1390f29313caabcd42e8
 
@@ -17,6 +18,7 @@ curl -X DELETE https://ton-projet.vercel.app/api/movies/573a1390f29313caabcd42e8
 # idComments
 
 # Générer un nouvelle id avec la commande PUT
+# L'utilisation des Endpoints sur la page /api-doc est similaire, prendre un idMovies généré par le Endpoint PUT
 
 curl -X GET https://ton-projet.vercel.app/api/movies/573a1390f29313caabcd42e8/comments/5a9427648b0beebeb69579e7
 
@@ -179,7 +181,7 @@ La documentation Swagger vous permet de :
 
 L'application inclut une documentation Swagger accessible via la route `/api-doc`. Elle est configurée dans le fichier `lib/swagger.ts` et implémentée dans `app/api-doc/page.tsx`.
 
-Pour plus d'informations sur la façon d'interroger votre base de données, consultez la [documentation MongoDB](https://docs.mongodb.com/) et la [documentation du pilote Node.js pour MongoDB](https://mongodb.github.io/node-mongodb-native/).
+Pour plus d'informations sur la façon d'interroger la base de données, consultez la [documentation MongoDB](https://docs.mongodb.com/) et la [documentation du pilote Node.js pour MongoDB](https://mongodb.github.io/node-mongodb-native/).
 
 ## Déploiement
 
@@ -187,17 +189,13 @@ Pour plus d'informations sur la façon d'interroger votre base de données, cons
 
 Le moyen le plus simple de déployer votre application Next.js est d'utiliser [Vercel](https://vercel.com), la plateforme des créateurs de Next.js.
 
-1. Poussez votre code vers GitHub, GitLab ou Bitbucket.
+1. Poussez le code vers GitHub ou GitLab.
 
 2. Importez votre projet sur Vercel:
    - Connectez-vous à [Vercel](https://vercel.com)
    - Sélectionnez "Import Project" et pointez vers votre dépôt
    - Configurez les variables d'environnement (notamment `MONGODB_URI`)
    - Cliquez sur "Deploy"
-
-**Alternative**: Déployez directement avec le bouton Vercel:
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fvotre-username%2Fwith-mongodb-app)
 
 ## Technologies utilisées
 
